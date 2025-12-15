@@ -1,0 +1,2 @@
+=== HOTSPOT REPORT ===
+CyclomaticCalculator.java → High Complexity/Size
