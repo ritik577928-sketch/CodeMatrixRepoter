@@ -7,6 +7,7 @@ public interface MetricCalculator {
 
 	void calculate(JavaSourceFile js, Metrics metrics);
 
-	//void calculator();  
+
+	//void calculator1();  
 
 }

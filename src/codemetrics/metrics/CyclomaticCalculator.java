@@ -61,5 +61,4 @@ public class CyclomaticCalculator implements MetricCalculator {
 	        }
 	        return count;
 	    }
-	
 	}

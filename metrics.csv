@@ -1,7 +1,7 @@
 File,LOC,Comments,Cyclomatic
-CyclomaticCalculator.java,0,13,21
-LineCounter.java,0,2,3
-JavaSourceFile.java,0,0,1
-MetricCalculator.java,0,1,1
-Commentcounter.java,0,16,10
-Metrics.java,0,9,4
+CyclomaticCalculator.java,54,13,21
+LineCounter.java,15,2,3
+JavaSourceFile.java,6,0,1
+MetricCalculator.java,5,1,1
+Commentcounter.java,43,11,10
+Metrics.java,42,8,4

@@ -54,5 +54,13 @@ public class Metrics {
     public double getComplexityPer100LOC() {
         if (loc == 0) return 0.0;
         return (getCyclomaticComplexity() * 100.0) / loc;
+    }   
+ // Complexity Percentage
+    public double getComplexityPercentage() {
+        if (loc == 0) return 0.0;
+        double value = ((double) getCyclomaticComplexity() / loc) * 100;
+        return Math.round(value * 100.0) / 100.0;
     }
+
 }
+

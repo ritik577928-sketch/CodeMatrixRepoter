@@ -5,7 +5,7 @@ package codemetrics.metrics;
 import codemetrics.model.JavaSourceFile;
 import codemetrics.model.Metrics;
 
-public  class LineCounter implements MetricCalculator {
+public class LineCounter implements MetricCalculator {
 	@Override	
 	public void calculate(JavaSourceFile js, Metrics metrics) {
 		        for (String line : js.getLines()) {
@@ -14,13 +14,5 @@ public  class LineCounter implements MetricCalculator {
 		            }
 		        }
 	}
-}
-//}
-//
-//	@Override
-//	public void calculator() {
-//	// TODO Auto-generated method stub
-//		
-//	}
-//	}
-//	
+	}
+	

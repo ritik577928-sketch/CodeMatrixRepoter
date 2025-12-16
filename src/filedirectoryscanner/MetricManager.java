@@ -17,7 +17,7 @@ public class MetricManager {
 	
 	private List<MetricCalculator> calculators = List.of(
 			new CyclomaticCalculator(),
-			//new LineCounter(),
+			new LineCounter(),
 			new Commentcounter()
 			);
 	
