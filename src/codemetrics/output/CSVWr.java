@@ -1,23 +1,33 @@
 package codemetrics.output;
-
 import codemetrics.model.Metrics;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+public class CSVWr {
 
-public class CSVWriter {
-
-    public static void writeCSV(Map<File, Metrics> map) {
+    public static void writeCSV(Map<File,Metrics> map) {
 
         try (PrintWriter pw = new PrintWriter(new FileWriter("metrics.csv"))) {
 
             // Header
             pw.println("File,LOC,Comments,Cyclomatic");
 
-            // Data rows
-            for (Map.Entry<File, Metrics> entry : map.entrySet()) {
+            // Sort entries by Cyclomatic Complexity 
+            List<Map.Entry<File, Metrics>> sortedList =
+                    map.entrySet()
+                       .stream()
+                       .sorted(Comparator.comparingInt(
+                               e -> ((Entry<File, Metrics>) e).getValue().getCyclomaticComplexity()
+                       ).reversed())   // highest first
+                       .collect(Collectors.toList());
+
+            // Data rows (sorted)
+            for (Map.Entry<File, Metrics> entry : sortedList) {
 
                 File file = entry.getKey();
                 Metrics m = entry.getValue();

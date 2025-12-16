@@ -61,6 +61,15 @@ public class Metrics {
         double value = ((double) getCyclomaticComplexity() / loc) * 100;
         return Math.round(value * 100.0) / 100.0;
     }
+    
+ // LOC Percentage
+    public double getLocPercentage() {
+        if (commentCount == 0) return 0.0;
+
+        double value = ((double) loc / commentCount) * 100;
+        return Math.round(value * 100.0) / 100.0;
+    }
+
 
 }
 
