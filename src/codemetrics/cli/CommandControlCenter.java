@@ -64,6 +64,7 @@ public class CommandControlCenter {
         else if (command.equals("export")) {
             CSVWriter.writeCSV(manager.getMetricsMap());
             HotspotWr.writeHotspots(manager.getMetricsMap());
+             PDFWr.writePDF(manager.getMetricsMap());
             System.out.println("Export complete.");
         }
 
