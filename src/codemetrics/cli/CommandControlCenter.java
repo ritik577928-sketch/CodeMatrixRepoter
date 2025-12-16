@@ -6,7 +6,7 @@ import java.util.Map;
 
 import codemetrics.model.JavaSourceFile;
 import codemetrics.model.Metrics;
-import codemetrics.output.CSVWriter;
+import codemetrics.output.CSVWr;
 import codemetrics.output.HotspotWr;
 import filedirectoryscanner.*;
 
@@ -18,6 +18,7 @@ public class CommandControlCenter {
 
     public void execution(String command) {
 
+        // ================= SCAN DIRECTORY =================
         if (command.startsWith("scanDir")) {
 
             String[] parts = command.split(" ", 2);
@@ -26,7 +27,7 @@ public class CommandControlCenter {
                 return;
             }
 
-            String path = parts[1].trim(); 
+            String path = parts[1].trim();
             System.out.println("Scanning Directory : " + path);
 
             try {
@@ -42,34 +43,58 @@ public class CommandControlCenter {
                 System.out.println("Scan Completed. Files analyzed: " + parsedFiles.size());
 
             } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Error during scan: " + e.getMessage());
             }
         }
 
-        else if (command.equals("summarize")) {
+        // ================= SUMMARY =================
+        else if (command.equalsIgnoreCase("summarize")) {
 
             Map<File, Metrics> map = manager.getMetricsMap();
+
+            if (map.isEmpty()) {
+                System.out.println("No data available. Run scanDir first.");
+                return;
+            }
+
             System.out.println("\n------ Summary -------");
 
             map.forEach((file, metrics) -> {
                 System.out.println(
-                    file.getName()
-                    + " ---> Complexity: " + metrics.getCyclomaticComplexity()
-                    + ",===> Comments: " + metrics.getCommentCount()
-                    + ",----> LOC: " + metrics.getLoc()
+                        file.getName() +
+                        " | LOC: " + metrics.getLoc() +
+                        " | Comments: " + metrics.getCommentCount() +
+                        " | Comment %: " + String.format("%.2f", metrics.getCommentPercentage()) +
+                        " | Cyclomatic: " + metrics.getCyclomaticComplexity() +
+                        " | Cyclomatic %: " + String.format("%.2f", metrics.getCyclomaticPercentage()) +
+                        " | Level: " + metrics.getComplexityLevel()
                 );
             });
         }
 
-        else if (command.equals("export")) {
-            CSVWriter.writeCSV(manager.getMetricsMap());
-            HotspotWr.writeHotspots(manager.getMetricsMap());
-             PDFWr.writePDF(manager.getMetricsMap());
+        // ================= EXPORT =================
+        else if (command.equalsIgnoreCase("export")) {
+
+            Map<File, Metrics> map = manager.getMetricsMap();
+
+            if (map.isEmpty()) {
+                System.out.println("No data available. Run scanDir first.");
+                return;
+            }
+
+            CSVWr.writeCSV(map);
+            HotspotWr.writeHotspots(map);
+
             System.out.println("Export complete.");
         }
 
+        // ================= UNKNOWN COMMAND =================
         else {
-            System.out.println("Unknown Export.");
+            System.out.println("Unknown command.");
+            System.out.println("Available commands:");
+            System.out.println("  scanDir <path>");
+            System.out.println("  summarize");
+            System.out.println("  export");
         }
     }
 }

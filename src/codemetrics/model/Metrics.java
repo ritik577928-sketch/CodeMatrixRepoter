@@ -49,27 +49,22 @@ public class Metrics {
     public int getCyclomaticComplexity() {
         return 1 + decisionPoints;
     }
+    public double getCommentPercentage() {
+        if (loc == 0) return 0;
+        return (commentCount * 100.0) / loc;
+    }
 
-    // Complexity per 100 LOC
-    public double getComplexityPer100LOC() {
-        if (loc == 0) return 0.0;
+    public double getCyclomaticPercentage() {
+        if (loc == 0) return 0;
         return (getCyclomaticComplexity() * 100.0) / loc;
-    }   
- // Complexity Percentage
-    public double getComplexityPercentage() {
-        if (loc == 0) return 0.0;
-        double value = ((double) getCyclomaticComplexity() / loc) * 100;
-        return Math.round(value * 100.0) / 100.0;
-    }
-    
- // LOC Percentage
-    public double getLocPercentage() {
-        if (commentCount == 0) return 0.0;
-
-        double value = ((double) loc / commentCount) * 100;
-        return Math.round(value * 100.0) / 100.0;
     }
 
-
+    public String getComplexityLevel() {
+        int c = getCyclomaticComplexity();
+        if (c <= 5) return "LOW";
+        else if (c <= 10) return "MEDIUM";
+        else return "HIGH";
+    }
 }
+
 

@@ -1,7 +1,7 @@
-File,LOC,Comments,Cyclomatic
-CyclomaticCalculator.java,54,13,21
-LineCounter.java,15,2,3
-JavaSourceFile.java,6,0,1
-MetricCalculator.java,5,1,1
-Commentcounter.java,43,11,10
-Metrics.java,42,8,4
+File,LOC,Comments,Cyclomatic,CommentPercentage,ComplexityPer100LOC,ComplexityLevel
+CyclomaticCalculator.java,54,13,21,24.07,38.89,HIGH
+Commentcounter.java,43,11,10,25.58,23.26,MEDIUM
+Metrics.java,42,8,4,19.05,9.52,LOW
+LineCounter.java,15,2,3,13.33,20.00,LOW
+JavaSourceFile.java,6,0,1,0.00,16.67,LOW
+MetricCalculator.java,5,1,1,20.00,20.00,LOW
